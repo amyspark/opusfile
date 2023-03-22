@@ -257,18 +257,18 @@ if get_option('docs')
 		input: 'doc/Doxyfile.in',
 		output: 'Doxyfile',
 		configuration: cdata,
-		install: false
 	)
 
-	dist_doc = get_option('datadir') / 'doc/opusfile'
+	dist_doc = get_option('datadir') / 'doc' / meson.project_name()
 
 	docs = custom_target(
 		'docs',
 		input: doxyfile,
-		output: ['html', 'doxygen-build.stamp',],
+		output: 'html',
 		command: [doxygen, doxyfile],
+		console: true,
 		install: true,
-		install_dir: [dist_doc, false],
+		install_dir: dist_doc,
 	)
 
 	install_data(
