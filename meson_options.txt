@@ -1,0 +1,6 @@
+option('http', type: 'boolean', value: true, description: 'Enable HTTP support')
+option('float_api', type: 'boolean', value: true, description: 'Enable floating-point API')
+option('fixed_point', type: 'boolean', value: false, description: 'Enable fixed-point calculation')
+option('assertions', type: 'boolean', value: false, description: 'Enable assertions in code')
+option('examples', type: 'boolean', value: true, description: 'Build example applications')
+option('docs', type: 'boolean', value: true, description: 'Build API documentation')
