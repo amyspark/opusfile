@@ -118,7 +118,9 @@ if get_option('http')
 		'-DOP_ENABLE_HTTP',
 	]
 
-	openssl = dependency('openssl', required: true)
+	# https://github.com/microsoft/vcpkg/issues/29582
+	# https://github.com/openssl/openssl/issues/8562
+	openssl = dependency('openssl', version: '< 1.1.0', required: false, disabler: true)
 
 	opusurl_deps = [
 		opusfile_dep,
@@ -177,16 +179,18 @@ if get_option('http')
 			include_directories: opusurl_includes,
 			c_args: project_arguments + opusurl_args,
 			dependencies: opusurl_deps,
-			version: meson.project_version(),
-			soversion: meson.project_version().split('.')[0],
+			install: true,
 		)
 	else
-		opusurl = static_library(
+		opusurl = shared_library(
 			'opusurl',
 			opusurl_srcs,
 			include_directories: opusurl_includes,
 			c_args: project_arguments + opusurl_args,
 			dependencies: opusurl_deps,
+			version: meson.project_version(),
+			soversion: meson.project_version().split('.')[0],
+			install: true,
 		)
 	endif
 
