@@ -58,7 +58,10 @@ if not get_option('fixed_point')
 	project_arguments += '-DOP_FIXED_POINT'
 endif
 
-if get_option('assertions')
+disable_assertions = get_option('b_ndebug')
+
+# https://mesonbuild.com/Builtin-options.html#details-for-buildtype
+if not disable_assertions or (disable_assertions == 'if-release' and not get_option('debug'))
 	project_arguments += '-DOP_ENABLE_ASSERTIONS'
 endif
 
